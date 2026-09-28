@@ -11,7 +11,7 @@
     </script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-900 text-slate-100 dark:bg-slate-900 dark:text-slate-100 bg-slate-50 text-slate-800 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-200">
+<body class="bg-slate-900 text-slate-100 dark:bg-slate-900 dark:text-slate-100 bg-slate-100 text-slate-900 min-h-screen font-sans antialiased flex flex-col justify-between transition-colors duration-200">
 
     <!-- Header Navbar -->
     <header class="bg-slate-800 dark:bg-slate-800 bg-white border-b border-slate-700 dark:border-slate-700 border-slate-200 sticky top-0 z-30 shadow-sm">
@@ -29,10 +29,10 @@
                 <span id="connection-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     <span class="w-2 h-2 mr-1.5 bg-emerald-400 rounded-full"></span> Connected to Sheets
                 </span>
-                <button onclick="toggleDarkMode()" class="bg-slate-700 dark:bg-slate-700 bg-slate-100 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-200 text-slate-200 dark:text-slate-200 text-slate-700 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 border border-slate-600 dark:border-slate-600 border-slate-300" title="Toggle Dark/Light Mode">
+                <button onclick="toggleDarkMode()" class="bg-slate-700 dark:bg-slate-700 bg-slate-200 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-300 text-slate-200 dark:text-slate-200 text-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 border border-slate-600 dark:border-slate-600 border-slate-300" title="Toggle Dark/Light Mode">
                     <i id="theme-icon" class="fa-solid fa-moon"></i>
                 </button>
-                <button onclick="openSettings()" class="bg-slate-700 dark:bg-slate-700 bg-slate-100 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-200 text-slate-200 dark:text-slate-200 text-slate-700 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 border border-slate-600 dark:border-slate-600 border-slate-300">
+                <button onclick="openSettings()" class="bg-slate-700 dark:bg-slate-700 bg-slate-200 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-300 text-slate-200 dark:text-slate-200 text-slate-800 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 border border-slate-600 dark:border-slate-600 border-slate-300">
                     <i class="fa-solid fa-gear"></i> Settings
                 </button>
             </div>
@@ -67,7 +67,7 @@
                 <form id="shiftLogForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Shift Period</label>
-                        <select id="shift" onchange="updateTurnoverView()" required class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        <select id="shift" onchange="updateTurnoverView()" required class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                             <option value="Morning Shift (06:00 - 14:00)">Morning Shift (06:00 - 14:00)</option>
                             <option value="Evening Shift (14:00 - 22:00)">Evening Shift (14:00 - 22:00)</option>
                             <option value="Night Shift (22:00 - 06:00)">Night Shift (22:00 - 06:00)</option>
@@ -77,11 +77,11 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Operator ID</label>
-                            <input type="text" id="operatorId" required placeholder="e.g. OP-4021" class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <input type="text" id="operatorId" required placeholder="e.g. OP-4021" class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Severity</label>
-                            <select id="severity" required class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="severity" required class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                                 <option value="Normal">Normal</option>
                                 <option value="Advisory">Advisory</option>
                                 <option value="Warning">Warning</option>
@@ -93,7 +93,7 @@
                     <div class="grid grid-cols-2 gap-3">
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Category</label>
-                            <select id="category" required class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <select id="category" required class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                                 <option value="System Event">System Event</option>
                                 <option value="Participant Concern">Participant Concern</option>
                                 <option value="Market Incident">Market Incident</option>
@@ -102,13 +102,13 @@
                         </div>
                         <div>
                             <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Participant Ref</label>
-                            <input type="text" id="participantId" placeholder="e.g. GEN-CO-02" class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <input type="text" id="participantId" placeholder="e.g. GEN-CO-02" class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Description of Event / Concern</label>
-                        <textarea id="description" rows="4" required placeholder="Detailed operational summary, participant inquiries, or system remarks..." class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                        <textarea id="description" rows="4" required placeholder="Detailed operational summary, participant inquiries, or system remarks..." class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
                     </div>
 
                     <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
@@ -127,14 +127,14 @@
                     <span class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-slate-400">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </span>
-                    <input type="text" id="searchInput" onkeyup="filterLogs()" placeholder="Search operational logs..." class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg pl-9 pr-4 py-2 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                    <input type="text" id="searchInput" onkeyup="filterLogs()" placeholder="Search operational logs..." class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg pl-9 pr-4 py-2 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none">
                 </div>
                 
                 <div class="flex items-center gap-2 w-full sm:w-auto justify-end">
                     <button onclick="syncPendingLogs()" class="bg-emerald-600/20 hover:bg-emerald-600/30 text-emerald-400 border border-emerald-500/30 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
                         <i class="fa-solid fa-rotate"></i> Sync Cloud
                     </button>
-                    <button onclick="exportCSV()" class="bg-slate-700 dark:bg-slate-700 bg-slate-100 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-200 text-slate-200 dark:text-slate-200 text-slate-700 border border-slate-600 dark:border-slate-600 border-slate-300 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
+                    <button onclick="exportCSV()" class="bg-slate-700 dark:bg-slate-700 bg-slate-200 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-300 text-slate-200 dark:text-slate-200 text-slate-800 border border-slate-600 dark:border-slate-600 border-slate-300 px-3 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2">
                         <i class="fa-solid fa-download"></i> Export CSV
                     </button>
                 </div>
@@ -146,12 +146,12 @@
                     <h2 class="font-semibold text-white dark:text-white text-slate-900 flex items-center gap-2">
                         <i class="fa-solid fa-list-ul text-blue-500"></i> Recorded Shift Logs
                     </h2>
-                    <span id="log-count" class="text-xs bg-slate-700 dark:bg-slate-700 bg-slate-100 text-slate-300 dark:text-slate-300 text-slate-700 px-2.5 py-1 rounded-full font-mono">0 entries</span>
+                    <span id="log-count" class="text-xs bg-slate-700 dark:bg-slate-700 bg-slate-200 text-slate-300 dark:text-slate-300 text-slate-800 px-2.5 py-1 rounded-full font-mono">0 entries</span>
                 </div>
                 
                 <div class="overflow-x-auto flex-1 max-h-[600px]">
                     <table class="w-full text-left border-collapse text-sm">
-                        <thead class="bg-slate-900 dark:bg-slate-900 bg-slate-100 text-slate-400 dark:text-slate-400 text-slate-600 uppercase text-xs sticky top-0 z-10 border-b border-slate-700 dark:border-slate-700 border-slate-200">
+                        <thead class="bg-slate-900 dark:bg-slate-900 bg-slate-200 text-slate-400 dark:text-slate-400 text-slate-700 uppercase text-xs sticky top-0 z-10 border-b border-slate-700 dark:border-slate-700 border-slate-300">
                             <tr>
                                 <th class="p-3.5">Timestamp / Shift</th>
                                 <th class="p-3.5">Operator</th>
@@ -171,10 +171,19 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-slate-800 dark:bg-slate-800 bg-white border-t border-slate-700 dark:border-slate-700 border-slate-200 py-4 text-center text-xs text-slate-400 dark:text-slate-400 text-slate-500 flex flex-col sm:flex-row justify-center items-center gap-2">
+    <footer class="bg-slate-800 dark:bg-slate-800 bg-white border-t border-slate-700 dark:border-slate-700 border-slate-200 py-4 text-center text-xs text-slate-400 dark:text-slate-400 text-slate-600 flex flex-col sm:flex-row justify-center items-center gap-2">
         <span>Market Operations Shift Logging System &bull; Cloud Integrated via Google Sheets</span>
         <span class="hidden sm:inline">&bull;</span>
-        <span class="font-semibold text-blue-400">Developed by Group E</span>
+        <div class="relative inline-block group cursor-pointer">
+            <span class="font-semibold text-blue-500 dark:text-blue-400 hover:underline">Developed by Group E</span>
+            <!-- Tooltip Popup -->
+            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 hidden group-hover:block w-72 p-3 bg-slate-900 dark:bg-slate-900 bg-slate-800 text-slate-100 text-xs rounded-lg shadow-2xl border border-slate-700 z-50 pointer-events-none text-center">
+                <p class="font-bold text-blue-400 mb-1 border-b border-slate-700 pb-1">Team Members</p>
+                <p class="tracking-wide font-mono text-[11px]">MNACCAD AYBLIM GJASALLE AATVILLAS</p>
+                <!-- Tooltip Arrow -->
+                <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-slate-900 dark:border-t-slate-900"></div>
+            </div>
+        </div>
     </footer>
 
     <!-- Settings Modal -->
@@ -191,12 +200,12 @@
             
             <div>
                 <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-400 text-slate-600 mb-1">Web App Deployment URL</label>
-                <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-900 dark:bg-slate-900 bg-slate-50 border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-800 focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono text-xs">
+                <input type="text" id="scriptUrlInput" placeholder="https://script.google.com/macros/s/.../exec" class="w-full bg-slate-900 dark:bg-slate-900 bg-white border border-slate-700 dark:border-slate-700 border-slate-300 rounded-lg p-2.5 text-sm text-slate-200 dark:text-slate-200 text-slate-900 focus:ring-2 focus:ring-blue-500 focus:outline-none font-mono text-xs">
                 <p class="text-xs text-slate-400 dark:text-slate-400 text-slate-500 mt-1">Paste the execution URL obtained after publishing your Google Apps Script backend.</p>
             </div>
 
             <div class="flex justify-end gap-3 pt-2">
-                <button onclick="closeSettings()" class="bg-slate-700 dark:bg-slate-700 bg-slate-200 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-300 text-slate-300 dark:text-slate-300 text-slate-700 px-4 py-2 rounded-lg text-sm font-medium transition">Cancel</button>
+                <button onclick="closeSettings()" class="bg-slate-700 dark:bg-slate-700 bg-slate-200 hover:bg-slate-600 dark:hover:bg-slate-600 hover:bg-slate-300 text-slate-300 dark:text-slate-300 text-slate-800 px-4 py-2 rounded-lg text-sm font-medium transition">Cancel</button>
                 <button onclick="saveSettings()" class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-medium transition shadow-lg shadow-blue-600/20">Save Configuration</button>
             </div>
         </div>
@@ -286,19 +295,19 @@
 
             turnoverLogs.forEach(log => {
                 let sevColor = 'text-slate-500 dark:text-slate-400';
-                if (log.severity === 'Advisory') sevColor = 'text-blue-500 dark:text-blue-400 font-bold';
-                if (log.severity === 'Warning') sevColor = 'text-amber-500 dark:text-amber-400 font-bold';
-                if (log.severity === 'Critical') sevColor = 'text-rose-500 dark:text-rose-400 font-bold';
+                if (log.severity === 'Advisory') sevColor = 'text-blue-600 dark:text-blue-400 font-bold';
+                if (log.severity === 'Warning') sevColor = 'text-amber-600 dark:text-amber-400 font-bold';
+                if (log.severity === 'Critical') sevColor = 'text-rose-600 dark:text-rose-400 font-bold';
 
                 const card = document.createElement('div');
-                card.className = "bg-slate-900/40 dark:bg-slate-900 bg-slate-50 border border-slate-700/70 dark:border-slate-700/70 border-slate-200 p-2.5 rounded-lg space-y-1";
+                card.className = "bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-700/70 p-2.5 rounded-lg space-y-1";
                 card.innerHTML = `
                     <div class="flex justify-between items-center text-[10px] text-slate-500 dark:text-slate-400">
-                        <span class="font-mono text-blue-500 dark:text-blue-400 font-semibold">${log.operatorId}</span>
+                        <span class="font-mono text-blue-600 dark:text-blue-400 font-semibold">${log.operatorId}</span>
                         <span class="${sevColor}">${log.severity} - ${log.category}</span>
                     </div>
                     <p class="text-slate-800 dark:text-slate-200 leading-snug">${escapeHtml(log.description)}</p>
-                    <div class="text-[10px] text-slate-500 dark:text-slate-500 text-right">${log.timestamp}</div>
+                    <div class="text-[10px] text-slate-400 dark:text-slate-500 text-right">${log.timestamp}</div>
                 `;
                 turnoverContainer.appendChild(card);
             });
@@ -408,13 +417,13 @@
             }
 
             filtered.forEach(log => {
-                let badgeColor = 'bg-slate-700 text-slate-300 border-slate-600';
-                if (log.severity === 'Advisory') badgeColor = 'bg-blue-500/10 text-blue-500 dark:text-blue-400 border-blue-500/20';
-                if (log.severity === 'Warning') badgeColor = 'bg-amber-500/10 text-amber-500 dark:text-amber-400 border-amber-500/20';
-                if (log.severity === 'Critical') badgeColor = 'bg-rose-500/10 text-rose-500 dark:text-rose-400 border-rose-500/20';
+                let badgeColor = 'bg-slate-200 text-slate-700 border-slate-300 dark:bg-slate-700 dark:text-slate-300 dark:border-slate-600';
+                if (log.severity === 'Advisory') badgeColor = 'bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20';
+                if (log.severity === 'Warning') badgeColor = 'bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20';
+                if (log.severity === 'Critical') badgeColor = 'bg-rose-500/10 text-rose-600 dark:text-rose-400 border-rose-500/20';
 
                 const tr = document.createElement('tr');
-                tr.className = "hover:bg-slate-700/20 dark:hover:bg-slate-700/30 transition text-slate-700 dark:text-slate-300";
+                tr.className = "hover:bg-slate-200/50 dark:hover:bg-slate-700/30 transition text-slate-800 dark:text-slate-300";
                 tr.innerHTML = `
                     <td class="p-3.5">
                         <div class="font-medium text-slate-900 dark:text-white">${log.timestamp}</div>
@@ -422,11 +431,11 @@
                     </td>
                     <td class="p-3.5 font-mono text-xs text-blue-600 dark:text-blue-400 font-semibold">${log.operatorId}</td>
                     <td class="p-3.5">
-                        <div class="text-xs font-semibold text-slate-800 dark:text-slate-200">${log.category}</div>
+                        <div class="text-xs font-semibold text-slate-900 dark:text-slate-200">${log.category}</div>
                         <span class="inline-block mt-1 px-2 py-0.5 rounded text-[10px] font-bold border ${badgeColor}">${log.severity}</span>
                     </td>
                     <td class="p-3.5 font-mono text-xs">${log.participantId}</td>
-                    <td class="p-3.5 text-slate-700 dark:text-slate-200 max-w-xs truncate" title="${escapeHtml(log.description)}">${escapeHtml(log.description)}</td>
+                    <td class="p-3.5 text-slate-800 dark:text-slate-200 max-w-xs truncate" title="${escapeHtml(log.description)}">${escapeHtml(log.description)}</td>
                     <td class="p-3.5 text-center">
                         ${log.synced 
                             ? '<span class="text-emerald-600 dark:text-emerald-400 text-xs flex items-center justify-center gap-1"><i class="fa-solid fa-cloud-check"></i> Synced</span>' 
