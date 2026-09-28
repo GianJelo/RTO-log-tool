@@ -6,7 +6,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 </head>
-<body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased">
+<body class="bg-slate-900 text-slate-100 min-h-screen font-sans antialiased flex flex-col justify-between">
 
     <!-- Header Navbar -->
     <header class="bg-slate-800 border-b border-slate-700 sticky top-0 z-30">
@@ -32,69 +32,86 @@
     </header>
 
     <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8">
+    <main class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 lg:grid-cols-3 gap-8 w-full mb-auto">
         
-        <!-- Left Column: Log Entry Form -->
-        <section class="lg:col-span-1 bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-xl h-fit sticky top-24">
-            <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 border-b border-slate-700 pb-3">
-                <i class="fa-solid fa-pen-to-square text-blue-500"></i> New Shift Log Entry
-            </h2>
+        <!-- Left Column: Turnover Backtracking & Log Entry Form -->
+        <section class="lg:col-span-1 space-y-6">
             
-            <form id="shiftLogForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Shift Period</label>
-                    <select id="shift" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                        <option value="Morning Shift (06:00 - 14:00)">Morning Shift (06:00 - 14:00)</option>
-                        <option value="Evening Shift (14:00 - 22:00)">Evening Shift (14:00 - 22:00)</option>
-                        <option value="Night Shift (22:00 - 06:00)">Night Shift (22:00 - 06:00)</option>
-                    </select>
+            <!-- Previous Shift Turnover Panel -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-5 shadow-xl">
+                <div class="flex items-center justify-between border-b border-slate-700 pb-3 mb-3">
+                    <h3 class="text-sm font-semibold text-white flex items-center gap-2">
+                        <i class="fa-solid fa-clock-rotate-left text-amber-400"></i> Previous Shift Turnover
+                    </h3>
+                    <span id="turnover-shift-label" class="text-[10px] bg-slate-900 text-amber-300 px-2 py-0.5 rounded border border-slate-700">Loading...</span>
                 </div>
+                <div id="turnoverContent" class="space-y-2.5 max-h-64 overflow-y-auto pr-1 text-xs">
+                    <!-- Populated via JS -->
+                </div>
+            </div>
 
-                <div class="grid grid-cols-2 gap-3">
+            <!-- Log Entry Form -->
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-6 shadow-xl">
+                <h2 class="text-lg font-semibold text-white mb-4 flex items-center gap-2 border-b border-slate-700 pb-3">
+                    <i class="fa-solid fa-pen-to-square text-blue-500"></i> New Shift Log Entry
+                </h2>
+                
+                <form id="shiftLogForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
                     <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Operator ID</label>
-                        <input type="text" id="operatorId" required placeholder="e.g. OP-4021" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Severity</label>
-                        <select id="severity" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <option value="Normal">Normal</option>
-                            <option value="Advisory">Advisory</option>
-                            <option value="Warning">Warning</option>
-                            <option value="Critical">Critical</option>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Shift Period</label>
+                        <select id="shift" onchange="updateTurnoverView()" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                            <option value="Morning Shift (06:00 - 14:00)">Morning Shift (06:00 - 14:00)</option>
+                            <option value="Evening Shift (14:00 - 22:00)">Evening Shift (14:00 - 22:00)</option>
+                            <option value="Night Shift (22:00 - 06:00)">Night Shift (22:00 - 06:00)</option>
                         </select>
                     </div>
-                </div>
 
-                <div class="grid grid-cols-2 gap-3">
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Category</label>
-                        <select id="category" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                            <option value="System Event">System Event</option>
-                            <option value="Participant Concern">Participant Concern</option>
-                            <option value="Market Incident">Market Incident</option>
-                            <option value="Communication">Communication</option>
-                        </select>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Operator ID</label>
+                            <input type="text" id="operatorId" required placeholder="e.g. OP-4021" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Severity</label>
+                            <select id="severity" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="Normal">Normal</option>
+                                <option value="Advisory">Advisory</option>
+                                <option value="Warning">Warning</option>
+                                <option value="Critical">Critical</option>
+                            </select>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Participant Ref</label>
-                        <input type="text" id="participantId" placeholder="e.g. GEN-CO-02 or N/A" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Category</label>
+                            <select id="category" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                                <option value="System Event">System Event</option>
+                                <option value="Participant Concern">Participant Concern</option>
+                                <option value="Market Incident">Market Incident</option>
+                                <option value="Communication">Communication</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Participant Ref</label>
+                            <input type="text" id="participantId" placeholder="e.g. GEN-CO-02" class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none">
+                        </div>
                     </div>
-                </div>
 
-                <div>
-                    <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Description of Event / Concern</label>
-                    <textarea id="description" rows="4" required placeholder="Detailed operational summary, participant inquiries, or system remarks..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
-                </div>
+                    <div>
+                        <label class="block text-xs font-semibold uppercase tracking-wider text-slate-400 mb-1">Description of Event / Concern</label>
+                        <textarea id="description" rows="4" required placeholder="Detailed operational summary, participant inquiries, or system remarks..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-2.5 text-sm text-slate-200 focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+                    </div>
 
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
-                    <i class="fa-solid fa-cloud-arrow-up"></i> Submit Log Entry
-                </button>
-            </form>
+                    <button type="submit" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium py-2.5 rounded-lg transition shadow-lg shadow-blue-600/20 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i> Submit Log Entry
+                    </button>
+                </form>
+            </div>
         </section>
 
         <!-- Right Column: Logs Viewer & Dashboard -->
-        <section class="lg:col-span-2 space-y-6">
+        <section class="lg:col-span-2 space-y-6 flex flex-col">
             
             <!-- Quick Filter & Actions Bar -->
             <div class="bg-slate-800 border border-slate-700 rounded-xl p-4 shadow-xl flex flex-col sm:flex-row justify-between items-center gap-4">
@@ -116,7 +133,7 @@
             </div>
 
             <!-- Log Entries Display Table -->
-            <div class="bg-slate-800 border border-slate-700 rounded-xl shadow-xl overflow-hidden">
+            <div class="bg-slate-800 border border-slate-700 rounded-xl shadow-xl overflow-hidden flex-1 flex flex-col">
                 <div class="px-6 py-4 border-b border-slate-700 flex justify-between items-center">
                     <h2 class="font-semibold text-white flex items-center gap-2">
                         <i class="fa-solid fa-list-ul text-blue-500"></i> Recorded Shift Logs
@@ -124,7 +141,7 @@
                     <span id="log-count" class="text-xs bg-slate-700 text-slate-300 px-2.5 py-1 rounded-full font-mono">0 entries</span>
                 </div>
                 
-                <div class="overflow-x-auto max-h-[600px]">
+                <div class="overflow-x-auto flex-1 max-h-[600px]">
                     <table class="w-full text-left border-collapse text-sm">
                         <thead class="bg-slate-900 text-slate-400 uppercase text-xs sticky top-0 z-10 border-b border-slate-700">
                             <tr>
@@ -144,6 +161,11 @@
             </div>
         </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-4 text-center text-xs text-slate-400">
+        Market Operations Shift Logging System &bull; Cloud Integrated via Google Sheets & Apps Script
+    </footer>
 
     <!-- Settings Modal -->
     <div id="settingsModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm hidden z-50 flex items-center justify-center p-4">
@@ -175,9 +197,16 @@
         let logs = JSON.parse(localStorage.getItem('market_shift_logs') || '[]');
         let scriptUrl = localStorage.getItem('market_script_url') || '';
 
+        const shiftSequence = [
+            "Morning Shift (06:00 - 14:00)",
+            "Evening Shift (14:00 - 22:00)",
+            "Night Shift (22:00 - 06:00)"
+        ];
+
         document.addEventListener('DOMContentLoaded', () => {
             updateConnectionStatus();
             renderLogs();
+            updateTurnoverView();
         });
 
         function openSettings() {
@@ -208,6 +237,45 @@
             }
         }
 
+        function updateTurnoverView() {
+            const currentShift = document.getElementById('shift').value;
+            const currentIndex = shiftSequence.indexOf(currentShift);
+            const prevIndex = (currentIndex - 1 + shiftSequence.length) % shiftSequence.length;
+            const previousShiftName = shiftSequence[prevIndex];
+
+            document.getElementById('turnover-shift-label').innerText = previousShiftName.split(' ')[0] + ' Shift Turnover';
+
+            const turnoverContainer = document.getElementById('turnoverContent');
+            turnoverContainer.innerHTML = '';
+
+            // Filter logs belonging to the previous shift
+            const turnoverLogs = logs.filter(l => l.shift === previousShiftName);
+
+            if (turnoverLogs.length === 0) {
+                turnoverContainer.innerHTML = `<div class="text-slate-500 italic text-center py-4">No records found for the preceding shift.</div>`;
+                return;
+            }
+
+            turnoverLogs.forEach(log => {
+                let sevColor = 'text-slate-400';
+                if (log.severity === 'Advisory') sevColor = 'text-blue-400 font-bold';
+                if (log.severity === 'Warning') sevColor = 'text-amber-400 font-bold';
+                if (log.severity === 'Critical') sevColor = 'text-rose-400 font-bold';
+
+                const card = document.createElement('div');
+                card.className = "bg-slate-900 border border-slate-700/70 p-2.5 rounded-lg space-y-1";
+                card.innerHTML = `
+                    <div class="flex justify-between items-center text-[10px] text-slate-400">
+                        <span class="font-mono text-blue-400 font-semibold">${log.operatorId}</span>
+                        <span class="${sevColor}">${log.severity} - ${log.category}</span>
+                    </div>
+                    <p class="text-slate-200 leading-snug">${escapeHtml(log.description)}</p>
+                    <div class="text-[10px] text-slate-500 text-right">${log.timestamp}</div>
+                `;
+                turnoverContainer.appendChild(card);
+            });
+        }
+
         async function handleFormSubmit(event) {
             event.preventDefault();
             
@@ -226,6 +294,7 @@
             logs.unshift(newLog);
             saveToLocalStorage();
             renderLogs();
+            updateTurnoverView();
             event.target.reset();
 
             if (scriptUrl) {
@@ -237,7 +306,6 @@
 
         async function pushLogToCloud(logEntry) {
             try {
-                // Using text/plain with no-cors to prevent CORS blocks from Google Script endpoints
                 await fetch(scriptUrl, {
                     method: 'POST',
                     mode: 'no-cors',
