@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="flex items-center gap-3">
-                <span id="connection-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-400 border border-amber-500/20">
-                    <span class="w-2 h-2 mr-1.5 bg-amber-400 rounded-full animate-pulse"></span> Config Required
+                <span id="connection-status" class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
+                    <span class="w-2 h-2 mr-1.5 bg-emerald-400 rounded-full"></span> Connected to Sheets
                 </span>
                 <button onclick="openSettings()" class="bg-slate-700 hover:bg-slate-600 text-slate-200 px-3.5 py-2 rounded-lg text-sm font-medium transition flex items-center gap-2 border border-slate-600">
                     <i class="fa-solid fa-gear"></i> Settings
@@ -195,7 +195,7 @@
     <!-- Application Script Logic -->
     <script>
         let logs = JSON.parse(localStorage.getItem('market_shift_logs') || '[]');
-        let scriptUrl = localStorage.getItem('market_script_url') || '';
+        let scriptUrl = localStorage.getItem('market_script_url') || 'https://script.google.com/macros/s/AKfycbxNxNJ6PXkc4BIAubJhSMlrYIj_MRSFGcGCpk1aWP5wfvOwJANS0lDA41pDa-fReIBW/exec';
 
         const shiftSequence = [
             "Morning Shift (06:00 - 14:00)",
@@ -248,7 +248,6 @@
             const turnoverContainer = document.getElementById('turnoverContent');
             turnoverContainer.innerHTML = '';
 
-            // Filter logs belonging to the previous shift
             const turnoverLogs = logs.filter(l => l.shift === previousShiftName);
 
             if (turnoverLogs.length === 0) {
@@ -306,11 +305,15 @@
 
         async function pushLogToCloud(logEntry) {
             try {
+                const encodedData = new URLSearchParams();
+                for (const key in logEntry) {
+                    encodedData.append(key, logEntry[key]);
+                }
+
                 await fetch(scriptUrl, {
                     method: 'POST',
                     mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify(logEntry)
+                    body: encodedData
                 });
                 
                 logEntry.synced = true;
@@ -337,11 +340,15 @@
             let successCount = 0;
             for (let log of pending) {
                 try {
+                    const encodedData = new URLSearchParams();
+                    for (const key in log) {
+                        encodedData.append(key, log[key]);
+                    }
+
                     await fetch(scriptUrl, {
                         method: 'POST',
                         mode: 'no-cors',
-                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                        body: JSON.stringify(log)
+                        body: encodedData
                     });
                     log.synced = true;
                     successCount++;
